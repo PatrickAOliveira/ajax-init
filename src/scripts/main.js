@@ -47,10 +47,17 @@ $(document).ready(() => {
 				const estado = json.uf;
 				const endereco = `${logradouro}, ${bairro} - ${cidade} - ${estado}`;
 				$("#endereco").val(endereco);
+			})
+			.catch((error) => {
+				alert(
+					"Ocorreu um erro ao buscar o endereço, tente novamente mais tarde"
+				);
+			})
+			.finally(() => {
+				setTimeout(() => {
+					$(this).find("i").removeClass("d-none");
+					$(this).find("span").addClass("d-none");
+				}, 1000);
 			});
-		setTimeout(() => {
-			$(this).find("i").removeClass("d-none");
-			$(this).find("span").addClass("d-none");
-		}, 2000);
 	});
 });
