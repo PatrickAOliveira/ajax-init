@@ -22,18 +22,35 @@ $(document).ready(() => {
 		$(this).find("i").addClass("d-none");
 		$(this).find("span").removeClass("d-none");
 
-		$.ajax(endpoint).done((e) => {
-			const logradouro = e.logradouro;
-			const bairro = e.bairro;
-			const cidade = e.localidade;
-			const estado = e.uf;
-			const endereco = `${logradouro}, ${bairro} - ${cidade} - ${estado}`;
-			$("#endereco").val(endereco);
+		// $.ajax(endpoint).done((e) => {
+		// 	const logradouro = e.logradouro;
+		// 	const bairro = e.bairro;
+		// 	const cidade = e.localidade;
+		// 	const estado = e.uf;
+		// 	const endereco = `${logradouro}, ${bairro} - ${cidade} - ${estado}`;
+		// 	$("#endereco").val(endereco);
 
-			setTimeout(() => {
-				$(this).find("i").removeClass("d-none");
-				$(this).find("span").addClass("d-none");
-			}, 2000);
-		});
+		// 	setTimeout(() => {
+		// 		$(this).find("i").removeClass("d-none");
+		// 		$(this).find("span").addClass("d-none");
+		// 	}, 2000);
+		// });
+
+		fetch(endpoint)
+			.then((resposta) => {
+				return resposta.json();
+			})
+			.then((json) => {
+				const logradouro = json.logradouro;
+				const bairro = json.bairro;
+				const cidade = json.localidade;
+				const estado = json.uf;
+				const endereco = `${logradouro}, ${bairro} - ${cidade} - ${estado}`;
+				$("#endereco").val(endereco);
+			});
+		setTimeout(() => {
+			$(this).find("i").removeClass("d-none");
+			$(this).find("span").addClass("d-none");
+		}, 2000);
 	});
 });
