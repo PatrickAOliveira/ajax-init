@@ -60,4 +60,12 @@ $(document).ready(() => {
 				}, 1000);
 			});
 	});
+
+	$("#form-pedido").submit((e) => {
+		e.preventDefault();
+
+		if ($("#nome").val().length == 0) {
+			throw new Error("Digite o nome");
+		}
+	});
 });
